@@ -1,12 +1,23 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System.Net.Http.Headers;
 using System.Reflection.Metadata.Ecma335;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Main
 {
 
     public class Game
     {
+        static void TypeEffect(string texto)
+        {
+            foreach (char caractere in texto)
+            {
+                Console.Write(caractere);
+                Thread.Sleep(60); 
+            }
+
+            Console.WriteLine(); 
+        }
 
         public static void Main(string[] args)
         {
@@ -14,94 +25,79 @@ namespace Main
            Random random = new Random();
             bool playagain = true ;
             string player;
+            string player0;
             string pc;
             string answer;
+            string texto2;
+            string texto1;
 
             while (playagain)
             {
                 player = "";
+                player0 = ""; 
                 pc = "";
                 answer = "";
-                while (player != "pedra" && player != "papel" && player != "tesoura")
+
+                while (player != "rock" && player != "paper" && player != "scissors")
                 {
-                    Console.WriteLine("Bem vindo ao jogo joken po, eu espero que você possa se divertir!!!");
-                    Console.Write("Coloque pedra papel ou tesoura: ");
-                    player = Console.ReadLine();
+                    
+                    texto1 = "Welcome to ROCK SCISSORS PAPER, you probably already know the rules, then LET'S PLAY !!!";
+                    TypeEffect(texto1);
+                    Console.WriteLine("--------------------------");
+                    Console.Write("Pick: ROCK SCISSORS PAPER:  ");
+                    player0 = Console.ReadLine();
+                    player = player0.ToLower();
+                    texto2 = "ROCK...SCISSORS...PAPER";
+                    TypeEffect(texto2);
+
                 }
                 switch (random.Next(1,3))
                     {
                         case 1:
-                            pc = "pedra";
+                            pc = "rock";
                             break;
                         case 2:
-                            pc = "papel";
+                            pc = "paper";
                             break;
                         case 3:
-                            pc = "tesoura";
+                            pc = "scissors";
                             break;
                     }
-                Console.WriteLine($"Máquina: {pc}");
-                Console.WriteLine($"Jogador: {player}");
 
-                switch (player)
+                Console.WriteLine("--------------------------");
+                Console.WriteLine($"Machine: {pc}");
+                Console.WriteLine($"You: {player}");
+                Console.WriteLine("--------------------------");
+
+                if(player == pc)
                 {
-                    case "pedra":
-                        if (pc == "pedra")
-                        {
-                            Console.WriteLine("Empate zé");
-                        }
-                        else if (pc == "papel")
-                        {
-                            Console.WriteLine("perdeu zé");
-                        }
-                        else 
-                        {
-                            Console.WriteLine("Ganhou zé");
-                        }
-                        break;
-                    case "papel":
-                        if (pc == "papel")
-                        {
-                            Console.WriteLine("Empate zé");
-                        }
-                        
-                     else if (pc == "tesoura")
-                        {
-                            Console.WriteLine("perdeu zé");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Ganhou zé");
-                        }
-                        break;
-                    case "tesoura":
-                        if (pc == "tesoura")
-                        {
-                            Console.WriteLine("Empate zé");
-                        }
-
-                        else if (pc == "pedra")
-                        {
-                            Console.WriteLine("perdeu zé");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Ganhou zé");
-                        }
-                        break;
+                    Console.WriteLine("It's a draw");
+                    Console.WriteLine("-------------------------");
                 }
-                Console.WriteLine("Quer continuar a jogar, Sim ou Não ?");
+                else if (player == "paper" && pc == "scissors" || 
+                         player == "scissors" &&  pc == "paper" ||
+                         player == "paper" && pc == "rock")
+                {
+                    Console.WriteLine("You Won !!");
+                    Console.WriteLine("-------------------------");
+                }
+                else
+                {
+                    Console.WriteLine("Loser lol");
+                    Console.WriteLine("--------------------------");
+                }
+
+                Console.WriteLine("Want to play again (y) or (n) ?");
                 answer = Console.ReadLine();
-                if (answer == "Sim" || answer == "sim" || answer == "s")
+                if (answer == "y" || answer == "Y" || answer == "yes")
                 {
                     playagain = true;
                 }
-                else if (answer == "Não" || answer == "não" || answer == "n")
+                else if (answer == "n" || answer == "N" || answer == "no")
                 {
                     playagain = false;
                 }
-
-                
+               
             }
             Console.WriteLine("I hope you enjoyed the game");
         }
