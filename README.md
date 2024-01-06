@@ -1,4 +1,4 @@
-<h1>ROCK SCISSORS PAPER GAME ON PROMPT COMAND </h1>
+<h1>ROCK SCISSORS PAPER GAME ON PROMPT COMAND 🪨 ✂️ 📄 </h1>
 
 <p>Simple Rock Scissors Paper game made only with C# on cmd
 
